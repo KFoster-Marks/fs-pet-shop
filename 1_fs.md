@@ -1,36 +1,4 @@
-# Node Filesystem
 
-![pet-shop](https://i.imgur.com/9tvF4Lx.jpg)
-
-A local pet shop keeps a database for all the pets they have in stock. However, they need you to build a command-line application in Node to handle a variety of subcommands and log the results to the console.
-
-The subcommands will be in the form of create, read, update, and destroy (CRUD). These subcommands will manage their database, which is a JSON-formatted `pets.json` file. Once the subcommand is correctly handled, the app will need to log an appropriate result to the console. Details of the subcommands the app will need to handle and their output can be found below.
-
-## Getting started
-
-After you fork and clone this repository to your development environment, change into the project directory and install any dependencies.
-
-```shell
-cd path/to/project
-npm install
-```
-
-Ignore `node_modules` from the repository. This prevents your node modules folder from being included in your repository.
-
-```shell
-echo 'node_modules' >> .gitignore
-```
-
-Create a `pets.js` file for your filesystem code.
-
-```shell
-touch pets.js
-```
-
-Create a `.eslintrc.js` file and add your preferred linting rules.
-
-```shell
-touch .eslintrc.js
 ```
 
 ## Assignment
