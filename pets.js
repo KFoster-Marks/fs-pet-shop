@@ -19,7 +19,7 @@ if (cmd === 'read') {
     var pets = JSON.parse(data);
 
     if (process.argv[3] && pets.length <= process.argv[3]) {
-      console.log('the array ain\'t that long, fool!');
+      console.error(`Usage: ${node} ${file} INDEX`);
       process.exit(1);
     } else if (process.argv[3]) {
       console.log(pets[process.argv[3]]);
