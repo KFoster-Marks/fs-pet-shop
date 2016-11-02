@@ -1,6 +1,3 @@
-
-```
-
 ## Assignment
 
 Your first task is to build a command-line application that displays its usage, ideally to the [standard error]['stderr'] channel, when invoked without a subcommand. The app should [exit the process]['exit'] with a non-zero exit code to indicate that it failed to complete any work.
