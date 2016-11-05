@@ -63,10 +63,39 @@ else if (cmd === 'create') {
 }
 
 
-
-
 else if (cmd === 'update') {
   console.log('the user commanded we update!');
+
+  fs.readFile(petsPath, 'utf8', function(readErr, data) {
+
+    if (readErr) {
+      throw readErr;
+    }
+
+    if (!process.argv[3] || !process.argv[4] || !process.argv[5] || !process.argv[6]) {
+      console.error(`Usage: ${node} ${file} ${cmd} INDEX AGE KIND NAME`);
+      process.exit(1);
+    }
+
+    var pets = JSON.parse(data);
+    var index = process.argv[3];
+    var pet = {
+      age: Number(process.argv[4]),
+      kind: process.argv[5],
+      name: process.argv[6]
+    };
+
+    pets[index] = pet;
+
+    var petsJSON = JSON.stringify(pets);
+
+    fs.writeFile(petsPath, petsJSON, function(writeErr) {
+      if (writeErr) {
+        throw writeErr;
+      }
+    });
+  });
+
 }
 
 else if (cmd === 'delete'){
