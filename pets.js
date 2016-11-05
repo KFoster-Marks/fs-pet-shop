@@ -8,7 +8,6 @@ var node = path.basename(process.argv[0]);
 var file = path.basename(process.argv[1]);
 var cmd = process.argv[2];
 
-
 if (cmd === 'read') {
   fs.readFile(petsPath, 'utf8', function(err, data) {
     if (err) {
@@ -27,9 +26,6 @@ if (cmd === 'read') {
     }
   });
 }
-
-
-//Finally, your application must also handle the create subcommand. Only when given an age, kind, and name will it create a record in the database. Remember to convert the age into an integer. For example:
 
 else if (cmd === 'create') {
   fs.readFile(petsPath, 'utf8', function(readErr, data) {
@@ -61,7 +57,6 @@ else if (cmd === 'create') {
     });
   });
 }
-
 
 else if (cmd === 'update') {
   console.log('the user commanded we update!');
