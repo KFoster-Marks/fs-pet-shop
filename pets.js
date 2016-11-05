@@ -8,7 +8,6 @@ var node = path.basename(process.argv[0]);
 var file = path.basename(process.argv[1]);
 var cmd = process.argv[2];
 
-//Additionally, your application must handle the read subcommand when given an out-of-bound index. In this case, it must display a more specific usage to the standard error channel and exit with a non-zero exit code.
 
 if (cmd === 'read') {
   fs.readFile(petsPath, 'utf8', function(err, data) {
@@ -29,9 +28,42 @@ if (cmd === 'read') {
   });
 }
 
+
+//Finally, your application must also handle the create subcommand. Only when given an age, kind, and name will it create a record in the database. Remember to convert the age into an integer. For example:
+
 else if (cmd === 'create') {
-  console.log('the user commanded we create!');
+  fs.readFile(petsPath, 'utf8', function(readErr, data) {
+
+    if (readErr) {
+      throw readErr;
+    }
+
+    if (!process.argv[3] || !process.argv[4] || !process.argv[5]) {
+      console.error(`Usage: ${node} ${file} ${cmd} AGE KIND NAME`);
+      process.exit(1);
+    }
+
+    var pets = JSON.parse(data);
+    var pet = {
+      age: Number(process.argv[3]),
+      kind: process.argv[4],
+      name: process.argv[5]
+    };
+
+    pets.push(pet);
+
+    var petsJSON = JSON.stringify(pets);
+
+    fs.writeFile(petsPath, petsJSON, function(writeErr) {
+      if (writeErr) {
+        throw writeErr;
+      }
+    });
+  });
 }
+
+
+
 
 else if (cmd === 'update') {
   console.log('the user commanded we update!');
@@ -42,6 +74,6 @@ else if (cmd === 'delete'){
 }
 
 else {
-  console.error(`Usage: ${node} ${file} [read | create | update | delete]`);
+  console.error(`Usage: ${node} ${file} [read | create | update | destroy]`);
   process.exit(1);
 }
