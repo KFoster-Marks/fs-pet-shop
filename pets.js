@@ -98,8 +98,36 @@ else if (cmd === 'update') {
 
 }
 
-else if (cmd === 'delete'){
-  console.log('the user commanded we delete!');
+else if (cmd === 'destroy'){
+  fs.readFile(petsPath, 'utf8', function(readErr, data) {
+
+    if (readErr) {
+      throw readErr;
+    }
+
+    if (!process.argv[3]) {
+      console.error(`Usage: ${node} ${file} ${cmd} INDEX`);
+      process.exit(1);
+    }
+
+    var pets = JSON.parse(data);
+    var index = process.argv[3];
+
+    if (index > pets.length - 1) {
+      console.log("nothing exists at that position");
+      process.exit(1);
+    }
+
+    pets.splice(index, 1);
+
+    var petsJSON = JSON.stringify(pets);
+
+    fs.writeFile(petsPath, petsJSON, function(writeErr) {
+      if (writeErr) {
+        throw writeErr;
+      }
+    });
+  });
 }
 
 else {
